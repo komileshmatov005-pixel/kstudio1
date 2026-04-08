@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wedding Invitation</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #2b3a8c;
+            --gold: #c5a059;
+            --soft-bg: #f8faff;
+        }
+
+        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background: var(--soft-bg); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* KONVERT */
+        #envelope {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--primary-blue);
+            background-image: linear-gradient(rgba(43, 58, 140, 0.7), rgba(43, 58, 140, 0.7)), url('flowers_bg.png');
+            background-size: cover; background-position: center;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+        .seal-container { text-align: center; cursor: pointer; animation: pulse 2s infinite; }
+        .seal-container img { width: 120px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4)); }
+
+        .lang-switcher {
+            position: fixed; top: 20px; right: 20px; z-index: 10001;
+            background: rgba(255,255,255,0.9); padding: 5px; border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--gold);
+        }
+        .lang-btn { border: none; background: none; padding: 6px 15px; cursor: pointer; font-weight: 600; font-size: 11px; border-radius: 15px; }
+        .lang-btn.active { background: var(--primary-blue); color: white; }
+
+        /* ASOSIY QISIM */
+        #content { display: none; }
+        .flower-bg {
+            background-image: url('1000119184.jpg');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            min-height: 100vh; width: 100%;
+        }
+        
+        .main-card {
+            max-width: 450px; margin: 0 auto; background: rgba(255, 255, 255, 0.96);
+            padding: 50px 25px; text-align: center; border: 1px solid var(--gold);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .names { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--primary-blue); margin: 10px 0; }
+        
+        /* TAKLIFNOMA MATNI */
+        .invitation-text {
+            font-style: italic;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+            margin: 25px 0;
+            padding: 0 10px;
+        }
+
+        .restaurant-icon { 
+            width: 100%; 
+            max-width: 250px; 
+            height: auto; 
+            margin: 20px auto; 
+            display: block;
+            opacity: 0.8;
+        }
+
+        .btn { display: block; width: 85%; margin: 12px auto; padding: 18px; border-radius: 35px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; text-align: center; }
+        .btn-google { background: var(--primary-blue); color: white; }
+        .btn-yandex { background: #f33e3e; color: white; }
+        .btn-save { background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); }
+
+        .timer-grid { display: flex; justify-content: center; gap: 15px; margin: 35px 0; }
+        .t-item { background: white; padding: 15px; border-radius: 12px; min-width: 70px; border: 1px solid #eee; }
+        .t-item span { display: block; font-size: 1.7rem; font-weight: bold; color: var(--primary-blue); }
+
+        /* KARTA DIZAYNI (RASMDAGIDAY) */
+        .gift-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            margin: 30px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+        .gift-card-title { color: var(--primary-blue); font-size: 0.95rem; font-weight: 600; margin-bottom: 10px; }
+        .card-num { 
+            font-size: 1.5rem; 
+            color: var(--primary-blue); 
+            font-weight: bold; 
+            letter-spacing: 1px; 
+            margin: 15px 0;
+            display: block;
+        }
+        .copy-btn {
+            background: #c5a059;
+            color: white;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .card-holder { color: #888; font-size: 0.85rem; }
+
+        .rsvp-section { margin-top: 45px; padding: 30px 20px; background: #f9fbff; border-radius: 20px; border: 1px dashed var(--gold); }
+        .input-field { width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        .options { display: flex; gap: 10px; margin-bottom: 20px; }
+        .opt-btn { flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 12px; cursor: pointer; background: white; font-weight: bold; }
+        .opt-btn.active { background: var(--primary-blue); color: white; }
+
+        .submit-btn { 
+            display: block; width: 100%; padding: 18px; 
+            border-radius: 35px; background: var(--primary-blue); color: white; 
+            font-weight: 600; cursor: pointer; border: none;
+        }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="changeLang('uz')">Lotin</button>
+        <button class="lang-btn" onclick="changeLang('cyrillic')">Кирилл</button>
+    </div>
+
+    <div id="envelope">
+        <div class="seal-container" onclick="openMe()">
+            <img src="seal.png" alt="Muhr">
+            <p id="tap-text" style="color:white; font-size: 11px; margin-top:15px; letter-spacing: 2px;">OCHISH UCHUN BOSING</p>
+        </div>
+    </div>
+
+    <div id="content" class="flower-bg">
+        <div style="padding: 60px 15px;">
+            <div class="main-card" data-aos="zoom-in">
+                
+                <img src="couple_icon.png" width="140" data-aos="fade-down" data-aos-delay="300">
+                <p id="sub-text" style="letter-spacing: 3px; font-size: 0.8rem; color: #777;" data-aos="fade-up" data-aos-delay="500">SIZNI TAKLIF ETAMIZ</p>
+                <h1 class="names" data-aos="zoom-out" data-aos-delay="700">Layli & Majnun</h1>
+                
+                <p id="inv-main-text" class="invitation-text" data-aos="fade-up" data-aos-delay="800">
+                    "Hayotimizning eng go'zal damlarini siz azizlar bilan birga baham ko'rishdan mamnunmiz. Nikoh to'yimizga tashrif buyurishingiz biz uchun katta sharafdir."
+                </p>
+
+                <div style="margin: 20px 0; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); display: inline-block; padding: 10px 30px;" data-aos="flip-up" data-aos-delay="900">
+                    <span style="font-size: 2.2rem; color: var(--primary-blue); font-weight: bold;">27</span><br>
+                    <span id="month-text" style="color: var(--primary-blue); font-weight: 600;">DEKABR | 2026</span>
+                </div>
+
+                <span class="time-text" style="display: block; color: var(--gold); font-weight: bold; margin-bottom: 20px;" data-aos="fade-in" data-aos-delay="1100">SOAT 18:00 DA</span>
+
+                <button onclick="downloadICS()" class="btn btn-save" id="save-btn" data-aos="zoom-in" data-aos-delay="1200">KALENDARGA SAQLASH</button>
+
+                <div class="map-section" data-aos="fade-up">
+                    <img src="building_icon.png" class="restaurant-icon" alt="Restaurant Building">
+                    <h3 id="restoran-name" style="color: var(--primary-blue); margin-top: 0;">"IDEAL SS" RESTORANI</h3>
+                    <a href="https://maps.app.goo.gl/1koHhC2uAUGuJLzi7" target="_blank" class="btn btn-google">GOOGLE MAPS</a>
+                    <a href="https://yandex.uz/maps/org/8650108130/" target="_blank" class="btn btn-yandex">YANDEX XARITA</a>
+                </div>
+
+                <div class="gift-card" data-aos="zoom-in">
+                    <div class="gift-card-title" id="gift-card-t">To'yona uchun (Karta)</div>
+                    <div class="card-num">9860 0000 0000 0000</div>
+                    <button class="copy-btn" onclick="copyCard()">Nusxa olish</button>
+                    <div class="card-holder">Yo'ldoshev Azamat (Humo)</div>
+                </div>
+
+                <div class="timer-grid">
+                    <div class="t-item" data-aos="fade-up" data-aos-delay="100"><span id="d">00</span><small id="l-d">Kun</small></div>
+                    <div class="t-item" data-aos="fade-up" data-aos-delay="200"><span id="h">00</span><small id="l-h">Soat</small></div>
+                    <div class="t-item" data-aos="fade-up" data-aos-delay="300"><span id="m">00</span><small id="l-m">Min</small></div>
+                </div>
+
+                <div class="rsvp-section" data-aos="zoom-in">
+                    <h3 id="rsvp-t" style="font-family: 'Dancing Script'; font-size: 1.8rem; color: var(--primary-blue);">Tashrifni tasdiqlang</h3>
+                    <form id="wedding-form" action="https://script.google.com/macros/s/AKfycbxr31odBSGT5ZV5j-4Kuhbqoa7LRqXDbB_iaAv1aimNy7GGciNKM0KdkhjXJhli/exec" method="POST">
+                        <input type="text" name="ism" id="guest-name" placeholder="Ismingiz" required class="input-field">
+                        <input type="number" name="toyona" id="gift-amount" placeholder="To'yona miqdori (ixtiyoriy)" class="input-field">
+                        <div class="options">
+                            <div class="opt-btn" id="btn-yes" onclick="setStatus('Boraman', this)">Boraman</div>
+                            <div class="opt-btn" id="btn-no" onclick="setStatus('Borolmayman', this)">Borolmayman</div>
+                        </div>
+                        <input type="hidden" name="holat" id="guest-status" required>
+                        <button type="submit" class="submit-btn" id="send-btn">YUBORISH</button>
+                    </form>
+                    <div id="success-msg" style="display:none; color: green; font-weight: bold; margin-top: 15px;">Rahmat!</div>
+                </div>
+
+                <img src="rings.png" width="80" style="margin-top: 45px;" data-aos="zoom-in">
+
+                <p id="footer-t" style="font-family: 'Dancing Script'; font-size: 2rem; color: var(--primary-blue);" data-aos="fade-up">Sizni kutib qolamiz!</p>
+
+            </div>
+        </div>
+    </div>
+
+    <audio id="muzika" loop><source src="music.mp3" type="audio/mpeg"></audio>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        function copyCard() {
+            navigator.clipboard.writeText("9860000000000000");
+            alert("Karta raqami nusxalandi!");
+        }
+
+        function downloadICS() {
+            const icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\n" +
+                "URL:" + document.URL + "\n" +
+                "DTSTART:20261227T130000Z\n" + 
+                "DTEND:20261227T180000Z\n" +
+                "SUMMARY:Layli va Majnun To'y Marosimi\n" +
+                "DESCRIPTION:Sizni to'yimizda kutib qolamiz!\n" +
+                "LOCATION:Ideal SS Restorani, Sho'rchi\n" +
+                "END:VEVENT\nEND:VCALENDAR";
+            
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'toy_taklifnomasi.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        const translations = {
+            uz: {
+                save: "KALENDARGA SAQLASH", tap: "OCHISH UCHUN BOSING", sub: "SIZNI TAKLIF ETAMIZ", month: "DEKABR | 2026",
+                inv: '"Hayotimizning eng go\'zal damlarini siz azizlar bilan birga baham ko\'rishdan mamnunmiz. Nikoh to\'yimizga tashrif buyurishingiz biz uchun katta sharafdir."',
+                restoran: '"IDEAL SS" RESTORANI', rsvp: "Tashrifni tasdiqlang", toyona_ph: "To'yona miqdori (ixtiyoriy)",
+                ph: "Ismingiz", yes: "Boraman", no: "Borolmayman", send: "YUBORISH", footer: "Sizni kutib qolamiz!",
+                gift_title: "To'yona uchun (Karta)", copy: "Nusxa olish"
+            },
+            cyrillic: {
+                save: "КАЛЕНДАРГА САҚЛАШ", tap: "ОЧИШ УЧУН БОСИНГ", sub: "СИЗНИ ТАКЛИФ ЭТАМИЗ", month: "ДЕКАБРЬ | 2026",
+                inv: '"Ҳаётимизнинг энг гўзал дамларини сиз азизlar билан бирга баҳам кўришдан мамнунмиз. Никоҳ тўйимизга ташриф буюришингиз биз учун катта шарафдир."',
+                restoran: '"IDEAL SS" РЕСТОРАНИ', rsvp: "Ташрифни тасдиқланг", toyona_ph: "Тўёна миқдори (ихтиёрий)",
+                ph: "Исмингиз", yes: "Бораман", no: "Боролмайман", send: "ЮБОРИШ", footer: "Сизни кутиб қоламиз!",
+                gift_title: "Тўёна учун (Карта)", copy: "Нусха олиш"
+            }
+        };
+
+        function changeLang(lang) {
+            const t = translations[lang];
+            const activeBtn = event ? event.target : document.querySelector('.lang-btn');
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            if(activeBtn) activeBtn.classList.add('active');
+            
+            document.getElementById('save-btn').innerText = t.save;
+            document.getElementById('tap-text').innerText = t.tap;
+            document.getElementById('sub-text').innerText = t.sub;
+            document.getElementById('inv-main-text').innerText = t.inv;
+            document.getElementById('month-text').innerText = t.month;
+            document.getElementById('restoran-name').innerText = t.restoran;
+            document.getElementById('rsvp-t').innerText = t.rsvp;
+            document.getElementById('guest-name').placeholder = t.ph;
+            document.getElementById('gift-amount').placeholder = t.toyona_ph;
+            document.getElementById('btn-yes').innerText = t.yes;
+            document.getElementById('btn-no').innerText = t.no;
+            document.getElementById('send-btn').innerText = t.send;
+            document.getElementById('footer-t').innerText = t.footer;
+            document.getElementById('gift-card-t').innerText = t.gift_title;
+            document.querySelector('.copy-btn').innerText = t.copy;
+        }
+
+        function setStatus(val, el) {
+            document.getElementById('guest-status').value = val;
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function openMe() {
+            document.getElementById('envelope').style.transform = 'translateY(-100vh)';
+            document.getElementById('content').style.display = 'block';
+            setTimeout(() => { AOS.init({ duration: 1200, once: true }); }, 100);
+            document.getElementById('muzika').play();
+            setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            const diff = new Date("December 27, 2026 18:00:00").getTime() - new Date().getTime();
+            if (diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            }
+        }
+    </script>
+</body>
+</html>
