@@ -296,6 +296,30 @@
                 document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             }
         }
+        document.getElementById('wedding-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Sahifa yangilanishini to'xtatadi
+
+    const btn = document.getElementById('send-btn');
+    const msg = document.getElementById('success-msg');
+    const form = this;
+    
+    // BU YERGA 1-BOSQICHDA OLGAN YANGI URL-INGIZNI QO'YING
+    const scriptURL = 'BU_YERGA_YANGI_URL_QOYILSIN'; 
+
+    btn.disabled = true;
+    btn.innerText = "YUBORILMOQDA...";
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            form.style.display = 'none'; // Formani yashiradi
+            msg.style.display = 'block'; // "Muvaffaqiyatli yuborildi" yozuvini chiqaradi
+        })
+        .catch(error => {
+            alert('Xatolik! Qaytadan urinib ko\'ring.');
+            btn.disabled = false;
+            btn.innerText = "YUBORISH";
+        });
+});
     </script>
 </body>
 </html>
